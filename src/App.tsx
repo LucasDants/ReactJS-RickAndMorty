@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Flex, SimpleGrid} from "@chakra-ui/react";
+import { Card } from "./components/Card";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+export function App() {
+  return (    
+   <Flex direction="column" alignContent="center" h="100vh">
+     <SimpleGrid flex="1" minChildWidth={220} gap={["2","4"]} columns={4} px={[16, 32]} py={10}>
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+     </SimpleGrid>
+   </Flex>
   );
 }
 
-export default App;
