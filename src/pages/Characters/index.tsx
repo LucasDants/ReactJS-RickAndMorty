@@ -7,8 +7,12 @@ import { Pagination } from "../../components/Pagination";
 import { CharactersData, CharactersVars, GET_CHARACTERS } from "../../services/getCharacters";
 
 export function Characters() {
-  const { loading, data, fetchMore, error, variables } = useQuery<CharactersData, CharactersVars>(GET_CHARACTERS, { variables: { page: 1 } })
+  const { loading, data, fetchMore, error } = useQuery<CharactersData, CharactersVars>(GET_CHARACTERS, { variables: { page: 1 } })
   const [searchText, setSearchText] = useState('')
+
+  const nextPage = data?.characters.info.next
+  const prevPage = data?.characters.info.prev
+  const currentPage = nextPage ? nextPage - 1 : prevPage + 1
 
   return (
     <>
@@ -24,13 +28,13 @@ export function Characters() {
           </Flex>
         ) : (
           <Flex direction="column" px={[8, 16, 32]} pb={10}>
-            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={variables.page} />
+            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
             <SimpleGrid justifyItems="center" minChildWidth={220} pt={10} spacingY={6}>
               {
                 data?.characters.results.map(character => <CharacterCard key={character.id} data={character} />)
               }
             </SimpleGrid>
-            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={variables.page} />
+            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
           </Flex>
         )
       }
