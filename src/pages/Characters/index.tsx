@@ -28,13 +28,13 @@ export function Characters() {
           </Flex>
         ) : (
           <Flex direction="column" px={[8, 16, 32]} pb={10}>
-            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
+            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page, name: searchText } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
             <SimpleGrid justifyItems="center" minChildWidth={220} pt={10} spacingY={6}>
               {
                 data?.characters.results.map(character => <CharacterCard key={character.id} data={character} />)
               }
             </SimpleGrid>
-            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
+            <Pagination onPageChange={(page) => fetchMore({ variables: { page: page, name: searchText } })} totalCountOfRegisters={data?.characters.info.count as number} registersPerPage={20} currentPage={currentPage} />
           </Flex>
         )
       }
