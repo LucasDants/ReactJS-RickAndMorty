@@ -48,8 +48,13 @@ export function Header({ searchText, setSearchText, onSearch }: HeaderProps) {
                             _placeholder={{ color: 'white' }}
                             value={searchText}
                             onChange={(event) => setSearchText(event.target.value)}
+                            onKeyDown={(event) => {
+                                if(event.key === 'Enter') {
+                                    onSearch()
+                                }
+                            }}
                         />
-                        <Icon as={RiSearchLine} fontSize="20" onClick={onSearch} _hover={{ color: 'cyan.500' }} />
+                        <Icon as={RiSearchLine} color="pink.500" fontSize="20" onClick={onSearch} _hover={{ color: 'cyan.500' }} />
                     </Flex>
                 ) : (<></>)
             }
