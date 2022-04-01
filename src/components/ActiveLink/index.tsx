@@ -1,15 +1,14 @@
-import {  Link as ChakraLink } from "@chakra-ui/react";
+import {  Link as ChakraLink, StyleProps } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Link, LinkProps, useLocation } from "react-router-dom";
 
-interface ActiveLinkProps extends LinkProps {
+type ActiveLinkProps = LinkProps & StyleProps & {
     children: ReactNode
-    shouldMatchExactHref?: boolean
 }
 
 export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
     const { pathname } = useLocation()
-    console.log(pathname)
+
     let isActive = false
 
     if(rest.to === pathname) {
